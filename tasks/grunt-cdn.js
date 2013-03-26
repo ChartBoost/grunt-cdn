@@ -105,6 +105,9 @@ module.exports = function(grunt) {
     }
 
     var src = path.join(relativeTo, resourceUrl.pathname).replace(/:\/(\w)/, '://$1');
+    if (relativeTo.match(/^\/\//)) {
+        src = '/' + src;
+    }
     grunt.log.writeln('Changing ' + resourceUrl.pathname.cyan + ' -> ' + src.cyan);
     return grunt.template.process("<%= url %><%= search %><%= hash %>", {
         data: {
